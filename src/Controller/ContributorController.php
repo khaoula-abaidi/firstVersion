@@ -21,7 +21,7 @@ class ContributorController extends AbstractController
     /**
      * @Route("/contributor/add", name="contributor_add")
      */
-    public function addContributor() : Response
+    public function add() : Response
     {
         // you can fetch the EntityManager via $this->getDoctrine()
         // or you can add an argument to your action: index(EntityManagerInterface $entityManager)
@@ -58,10 +58,6 @@ class ContributorController extends AbstractController
         }
 
         return new Response('Check out this great contributor: '.$contributor->getLogin());
-
-        // or render a template
-        // in the template, print things with {{ contributor.name }}
-        // return $this->render('product/show.html.twig', ['contributor' => $contributor]);
     }
     /**
      * @Route("/contributor/edit/{id}")
