@@ -2,11 +2,29 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}CCSD CAS &#8211; Central Authentication Service{% endblock %}</title>
+        <link rel="stylesheet" href="https://cas.ccsd.cnrs.fr/cas/css/cas.css?20180523" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <link rel="icon" href="https://static.ccsd.cnrs.fr/img/favicon.png" />
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="//www.ccsd.cnrs.fr/" title="Centre pour la communication Scientifique directe"><img src="https://static.ccsd.cnrs.fr/img/logo-ccsd-navbar.png" border="0"></a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="http://support.ccsd.cnrs.fr">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+    {% block body %}{% endblock %}
+        <script type="text/javascript" src="https://cas.ccsd.cnrs.fr/cas/js/cas.js"></script>
+        <script type="text/javascript" src="https://cas.ccsd.cnrs.fr/cas/js/ccsd.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

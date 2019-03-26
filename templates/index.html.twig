@@ -1,0 +1,76 @@
+
+{% extends 'base.html.twig' %}
+{% block body %}
+
+    <div class="container">
+        <h1>Service Central d'Authentification du <abbr lang="fr" title="Centre pour la communication scientifique directe">CCSD</abbr></h1>
+        <div id="logos-div">
+            <img class="img-rounded" src="https://cas.ccsd.cnrs.fr/cas/images/logo-episciences.png" alt="">
+            <img class="img-rounded center-logo" src="https://cas.ccsd.cnrs.fr/cas/images/logo-hal.png" alt="">
+            <img class="img-rounded" src="https://cas.ccsd.cnrs.fr/cas/images/logo-sciencesconf.png" alt="">
+        </div>
+
+        <div class="row text-center">
+            <div id="login-account" class="col-sm-6 col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <strong>Entrez votre identifiant et votre mot de passe.</strong>
+                    </div>
+                    <div class="panel-body" id="login">
+                        <form id="credential" role="form" accept-charset="UTF-8" action="https://cas.ccsd.cnrs.fr/cas/" method="post">
+                            <fieldset>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-11  col-md-offset-1 ">
+                                        <img class="img-rounded profile-img"
+                                             src="https://cas.ccsd.cnrs.fr/cas/images/logo-hal.png"
+                                             alt="">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-11  col-md-offset-1 ">
+                                        <div class="form-group">
+                                            <div class="input-group">
+										<span class="input-group-addon"> <i class="glyphicon glyphicon-user"></i>
+										</span>
+
+                                                <label class="sr-only" for="username">Login</label>
+                                                <input id="username" name="username" class="form-control required" tabindex="1" placeholder="Login" type="text" value=""/>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+										<span class="input-group-addon"> <i class="glyphicon glyphicon-lock"></i>
+										</span>
+                                                <label class="sr-only" for="password">Mot de passe</label>
+
+                                                <input id="password" name="password" class="form-control required" tabindex="2" placeholder="Mot de passe" accesskey="m" type="password" value=""/>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-12 col-md-11  col-md-offset-1 ">
+                                        <input id="warn" name="warn" value="true" tabindex="3" accesskey="" type="checkbox" />
+                                        <label for="warn" style="font-size:80%;font-weight:normal;display:inline;"><span class="accesskey">P</span>révenez-moi avant d'accéder à d'autres services.</label>
+
+                                        <input type="hidden" name="lt" value="LT-20028-iLkshd41ikGZtNL4cAVXC1FCpr66wC-ccsdwb10" />
+                                        <input type="hidden" name="execution" value="e1s1" />
+                                        <input type="hidden" name="_eventId" value="submit" />
+
+                                        <div style="text-align:center;padding:1em 1em 0 1em;">
+                                            <input class="btn btn-primary" name="submit" accesskey="l" value="SE CONNECTER" tabindex="4" type="submit" />
+                                            <a id="back-button" class="btn btn-default" href="">Annuler</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
