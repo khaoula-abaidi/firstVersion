@@ -60,6 +60,11 @@ class Document
         return $this;
     }
 
+    public function __construct()
+    {
+        $this->modification_date = new \DateTime();
+    }
+
     public function getModificationDate(): ?\DateTimeInterface
     {
         return $this->modification_date;

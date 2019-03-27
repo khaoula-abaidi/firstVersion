@@ -3,64 +3,56 @@
 namespace App\Controller;
 
 use App\Entity\Contributor;
+use App\Form\ContributorType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ContributorController extends AbstractController
 {
     /**
-     * @Route("/contributor", name="contributor")
+     * Listing the user's information(s)
+     * @Route("/contributor/index/{id}", name="contributor_index")
+     * @param $id
+     * @return Response
      */
-    public function index()
-    {
-        return $this->render('contributor/index.html.twig', [
-            'controller_name' => 'ContributorController',
-        ]);
-    }
-    /**
-     * @Route("/contributor/add", name="contributor_add")
-     */
-    public function add() : Response
-    {
-        // you can fetch the EntityManager via $this->getDoctrine()
-        // or you can add an argument to your action: index(EntityManagerInterface $entityManager)
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $contributor = new Contributor();
-
-        $contributor->setLogin('khaoula')
-            ->setPwd('abaidi')
-            ->setIsAdmin(false);
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($contributor);
-
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
-
-        return new Response('Saved new contributor with id '.$contributor->getId());
-    }
-    /**
-     * @Route("/contributor/{id}", name="contributor_show")
-     */
-    public function show($id) : Response
+    public function index($id)
     {
         $contributor = $this->getDoctrine()
-            ->getRepository(Contributor::class)
-            ->find($id);
+                            ->getRepository(Contributor::class)
+                            ->find($id);
 
         if (!$contributor) {
 
-            throw $this->createNotFoundException(
-                'No contributor for  id '.$id
-            );
+            return $this->render('contributor/error.html.twig');
 
         }
-
-        return new Response('Check out this great contributor: '.$contributor->getLogin());
+        return $this->render('contributor/index.html.twig', [
+            'contributor' => $contributor
+        ]);
     }
     /**
-     * @Route("/contributor/edit/{id}")
+     * Insert a new Contributor using a form
+     * @Route("/contributor/create", name="contributor_create")
+     */
+    public function create(Request $request) : Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $contributor = new Contributor();
+        $form = $this->createForm(ContributorType::class,$contributor);
+        if($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+            $em->persist($contributor);
+            $em->flush();
+        }
+        return $this->render('contributor/create.html.twig',[
+                                    'form' => $form->createView()
+
+                                 ]);
+    }
+
+    /**
+     * @Route("/user/edit/{id}")
      */
     public function update($id)
     {
@@ -81,7 +73,7 @@ class ContributorController extends AbstractController
         ]);
     }
     /**
-     * @Route("/contributor/remove/{id}")
+     * @Route("/user/remove/{id}")
      */
     public function remove($id)
     {

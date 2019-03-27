@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block title %}Ajout d'un document{%  endblock %}
+{% block body %}
+    <div class="corps">
+        <ol class="breadcrumb">
+            <li class="active"> Créer un document </li>
+        </ol>
+        <blockquote>Création d'un document sur le Service Central d'Authentification du CCSD. Le compte est valable sur HAL, Sciencesconf et Episciences</blockquote>
+        <hr />
+        <div id="flash-messages">
+        </div>
+        <span class="col-md-9 col-md-offset-3 ccsd_form_required">Champs requis</span>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_row(form.doi) }}
+        {{ form_row(form.title) }}
+        <button class="btn-primary">Créer un document</button>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

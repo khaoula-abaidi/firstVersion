@@ -3,47 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Document;
+use App\Form\DocumentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DocumentController extends AbstractController
 {
     /**
-     * @Route("/document", name="document")
+     * Listing document's information(s)
+     * @Route("/document/index/{id}", name="document_index")
      */
-    public function index()
-    {
-        return $this->render('document/index.html.twig', [
-            'controller_name' => 'DocumentController',
-        ]);
-    }
-    /**
-     * @Route("/document/add", name="document_add")
-     */
-    public function add() : Response
-    {
-        // you can fetch the EntityManager via $this->getDoctrine()
-        // or you can add an argument to your action: index(EntityManagerInterface $entityManager)
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $document = new Document();
-
-        $document->setDoi('10-45878524')
-            ->setTitle('recherche academique')
-            ->setModificationDate(new \DateTime('now'));
-        // tell Doctrine you want to (eventually) save the Product (no queries yet)
-        $entityManager->persist($document);
-
-        // actually executes the queries (i.e. the INSERT query)
-        $entityManager->flush();
-
-        return new Response('Saved new document with id '.$document->getId());
-    }
-    /**
-     * @Route("/document/{id}", name="document_show")
-     */
-    public function show($id) : Response
+    public function index($id)
     {
         $document = $this->getDoctrine()
             ->getRepository(Document::class)
@@ -51,14 +23,35 @@ class DocumentController extends AbstractController
 
         if (!$document) {
 
-            throw $this->createNotFoundException(
-                'No document for  id '.$id
-            );
+            return $this->render('document/error.html.twig');
 
         }
-
-        return new Response('Check out this great contributor: '.$document->getLogin());
+        return $this->render('document/index.html.twig', [
+            'document' => $document
+        ]);
     }
+    /**
+     * Insert a new Document using a form
+     * @Route("/document/create", name="document_create")
+     */
+    public function create(Request $request) : Response
+    {
+
+        $em = $this->getDoctrine()->getManager();
+
+        $document = new Document();
+
+        $form = $this->createForm(DocumentType::class,$document);
+        if($request->isMethod('POST') && $form->handleRequest($request)->isValid()){
+            $em->persist($document);
+            $em->flush();
+        }
+        return $this->render('document/create.html.twig',[
+            'form' => $form->createView()
+        ]);
+
+    }
+
     /**
      * @Route("/document/edit/{id}")
      */

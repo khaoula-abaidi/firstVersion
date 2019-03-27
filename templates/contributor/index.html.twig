@@ -1,20 +1,34 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContributorController!{% endblock %}
+{% block title %}Mon espace{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="well well-sm">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-4">
+                            <img src="http://placehold.it/380x500" alt="" class="img-rounded img-responsive" />
+                        </div>
+                        <div class="col-sm-6 col-md-8">
+                            <h4>{{ contributor.nom }} {{ contributor.prenom }}</h4>
+                            <small><cite title="{{ contributor.civilite }}">{{ contributor.login }} <i class="glyphicon glyphicon-map-marker">
+                                    </i></cite></small>
+                            <p>
+                                <i class="glyphicon glyphicon-envelope"></i>{{ contributor.email }}
+                                <br />
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/abaidi/firstVersion/src/Controller/ContributorController.php'|file_link(0) }}">src/Controller/ContributorController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/abaidi/firstVersion/templates/contributor/index.html.twig'|file_link(0) }}">templates/contributor/index.html.twig</a></code></li>
-    </ul>
-</div>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-primary">
+                                    {{ contributor.login }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

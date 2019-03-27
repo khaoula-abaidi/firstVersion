@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block title %}Ajout d'un contributeur{%  endblock %}
+{% block body %}
+<div class="corps">
+    <ol class="breadcrumb">
+        <li class="active"> Créer un compte </li>
+    </ol>
+    <blockquote>Création d'un compte sur le Service Central d'Authentification du CCSD. Le compte est valable sur HAL, Sciencesconf et Episciences</blockquote>
+    <hr />
+    <div id="flash-messages">
+    </div>
+    <span class="col-md-9 col-md-offset-3 ccsd_form_required">Champs requis</span>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_row(form.login) }}
+    {{ form_row(form.pwd) }}
+    {{ form_row(form.isAdmin) }}
+    {{ form_row(form.civilite) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.prenom) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.complement_nom) }}
+    {{ form_row(form.confirmationpwd) }}
+    <button class="btn-primary">Créer un compte</button>
+    {{ form_end(form) }}
+</div>
+{% endblock %}
