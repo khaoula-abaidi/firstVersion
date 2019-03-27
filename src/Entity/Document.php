@@ -34,9 +34,19 @@ class Document
     private $modification_date;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Contributor", mappedBy="document")
+     * @ORM\OneToMany(targetEntity="App\Entity\Contributor", mappedBy="document", cascade="all", orphanRemoval=true)
      */
     private $contributors;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $user1;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $user2;
 
     public function getId(): ?int
     {
@@ -112,6 +122,30 @@ class Document
                 $contributor->setDocument(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser1(): ?string
+    {
+        return $this->user1;
+    }
+
+    public function setUser1(?string $user1): self
+    {
+        $this->user1 = $user1;
+
+        return $this;
+    }
+
+    public function getUser2(): ?string
+    {
+        return $this->user2;
+    }
+
+    public function setUser2(?string $user2): self
+    {
+        $this->user2 = $user2;
 
         return $this;
     }
