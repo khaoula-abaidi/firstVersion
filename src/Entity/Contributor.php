@@ -61,6 +61,12 @@ class Contributor
      */
     private $confirmationpwd;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Document", inversedBy="contributors")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $document;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -170,6 +176,18 @@ class Contributor
     public function setConfirmationpwd(string $confirmationpwd): self
     {
         $this->confirmationpwd = $confirmationpwd;
+
+        return $this;
+    }
+
+    public function getDocument(): ?Document
+    {
+        return $this->document;
+    }
+
+    public function setDocument(?Document $document): self
+    {
+        $this->document = $document;
 
         return $this;
     }

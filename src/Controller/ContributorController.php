@@ -23,6 +23,10 @@ class ContributorController extends AbstractController
                             ->getRepository(Contributor::class)
                             ->find($id);
 
+
+                                                // voir les le document lie au contributor
+                                                 //dump($contributor->getDocument());
+
         if (!$contributor) {
 
             return $this->render('contributor/error.html.twig');
