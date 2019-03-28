@@ -57,16 +57,9 @@ class Contributor
     private $complement_nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $confirmationpwd;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Document", inversedBy="contributors")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $document;
-
+    private $photo;
     public function getId(): ?int
     {
         return $this->id;
@@ -168,27 +161,16 @@ class Contributor
         return $this;
     }
 
-    public function getConfirmationpwd(): ?string
+    public function getPhoto(): ?string
     {
-        return $this->confirmationpwd;
+        return $this->photo;
     }
 
-    public function setConfirmationpwd(string $confirmationpwd): self
+    public function setPhoto(?string $photo): self
     {
-        $this->confirmationpwd = $confirmationpwd;
+        $this->photo = $photo;
 
         return $this;
     }
 
-    public function getDocument(): ?Document
-    {
-        return $this->document;
-    }
-
-    public function setDocument(?Document $document): self
-    {
-        $this->document = $document;
-
-        return $this;
-    }
 }

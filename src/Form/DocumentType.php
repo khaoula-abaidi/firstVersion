@@ -17,6 +17,7 @@ class DocumentType extends AbstractType
         $builder
             ->add('doi')
             ->add('title')
+            ->add('creation_date')
             ->add('modification_date')
             ->add('user1')
             ->add('user2')

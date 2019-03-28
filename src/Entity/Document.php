@@ -32,12 +32,6 @@ class Document
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $modification_date;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Contributor", mappedBy="document", cascade="all", orphanRemoval=true)
-     */
-    private $contributors;
-
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -47,6 +41,11 @@ class Document
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $user2;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $creation_date;
 
     public function getId(): ?int
     {
@@ -80,7 +79,7 @@ class Document
     public function __construct()
     {
         $this->modification_date = new \DateTime();
-        $this->contributors = new ArrayCollection();
+        $this->creation_date = new \DateTime();
     }
 
     public function getModificationDate(): ?\DateTimeInterface
@@ -91,37 +90,6 @@ class Document
     public function setModificationDate(?\DateTimeInterface $modification_date): self
     {
         $this->modification_date = $modification_date;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Contributor[]
-     */
-    public function getContributors(): Collection
-    {
-        return $this->contributors;
-    }
-
-    public function addContributor(Contributor $contributor): self
-    {
-        if (!$this->contributors->contains($contributor)) {
-            $this->contributors[] = $contributor;
-            $contributor->setDocument($this);
-        }
-
-        return $this;
-    }
-
-    public function removeContributor(Contributor $contributor): self
-    {
-        if ($this->contributors->contains($contributor)) {
-            $this->contributors->removeElement($contributor);
-            // set the owning side to null (unless already changed)
-            if ($contributor->getDocument() === $this) {
-                $contributor->setDocument(null);
-            }
-        }
 
         return $this;
     }
@@ -146,6 +114,18 @@ class Document
     public function setUser2(?string $user2): self
     {
         $this->user2 = $user2;
+
+        return $this;
+    }
+
+    public function getCreationDate(): ?\DateTimeInterface
+    {
+        return $this->creation_date;
+    }
+
+    public function setCreationDate(?\DateTimeInterface $creation_date): self
+    {
+        $this->creation_date = $creation_date;
 
         return $this;
     }

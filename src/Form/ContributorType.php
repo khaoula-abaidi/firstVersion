@@ -12,15 +12,15 @@ class ContributorType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('login')
-            ->add('pwd')
-            ->add('isAdmin')
             ->add('civilite')
             ->add('nom')
             ->add('prenom')
-            ->add('email')
             ->add('complement_nom')
-            ->add('confirmationpwd')
+            ->add('email')
+            ->add('login')
+            ->add('pwd')
+            ->add('isAdmin')
+            ->add('photo')
         ;
     }
 
