@@ -47,6 +47,11 @@ class Document
      */
     private $creation_date;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Contributor", inversedBy="documents")
+     */
+    private $contributors;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -80,6 +85,7 @@ class Document
     {
         $this->modification_date = new \DateTime();
         $this->creation_date = new \DateTime();
+        $this->contributors = new ArrayCollection();
     }
 
     public function getModificationDate(): ?\DateTimeInterface
@@ -129,4 +135,31 @@ class Document
 
         return $this;
     }
+
+    /**
+     * @return Collection|Contributor[]
+     */
+    public function getContributors(): Collection
+    {
+        return $this->contributors;
+    }
+
+    public function addContributor(Contributor $contributor): self
+    {
+        if (!$this->contributors->contains($contributor)) {
+            $this->contributors[] = $contributor;
+        }
+
+        return $this;
+    }
+
+    public function removeContributor(Contributor $contributor): self
+    {
+        if ($this->contributors->contains($contributor)) {
+            $this->contributors->removeElement($contributor);
+        }
+
+        return $this;
+    }
+
 }
