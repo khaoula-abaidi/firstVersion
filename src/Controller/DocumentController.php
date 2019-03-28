@@ -20,7 +20,7 @@ class DocumentController extends AbstractController
         $document = $this->getDoctrine()
             ->getRepository(Document::class)
             ->find($id);
-        dump($document);
+        //dump($document);
         if (!$document) {
 
             return $this->render('document/error.html.twig');

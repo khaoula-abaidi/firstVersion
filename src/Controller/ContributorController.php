@@ -26,6 +26,7 @@ class ContributorController extends AbstractController
 
                                                 // voir les le document lie au contributor
                                                  //dump($contributor->getDocument());
+        dump($contributor);
 
         if (!$contributor) {
 
